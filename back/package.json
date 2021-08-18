@@ -8,7 +8,7 @@
     "clean": "rimraf dist",
     "build": "babel src -d dist --source-maps --copy-files",
     "serve": "node dist/server.js",
-    "test": "npm run build",
+    "test": "jest",
     "start": "nodemon --exec babel-node src/server.js ",
     "deploy:dev": "npm install && npm run start",
     "deploy": "npm install && npm run clean && npm run build && npm run serve"
