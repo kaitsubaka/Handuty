@@ -1,12 +1,12 @@
 import React, {useContext, useEffect, useState} from "react";
 import {appContext} from "../context/AppContext";
 import {Link, Redirect} from "react-router-dom";
-import SidebarTrabajador from "../components/SidebarTrabajador";
 import flecha from "../recursos/arrowIcon.svg";
 import "./CrearServicio.css";
 import {FormattedMessage} from 'react-intl';
 import Joi from "joi";
 import {Button, Modal} from "react-bootstrap";
+import Sidebar from "../components/Sidebar";
 
 
 function CrearServicio(props){
@@ -105,7 +105,7 @@ function CrearServicio(props){
 
     return (
         <div className="App">
-            <SidebarTrabajador/>
+            <Sidebar/>
             <div className="formServicio">
                 <div className="formServicio-title">
                     <Link to="/perfilTrabajador">

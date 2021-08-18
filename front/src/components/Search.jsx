@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import "./Search.css";
 import searchIcon from "../recursos/searchIcon.svg";
 import {useHistory} from "react-router-dom";
-import {FormattedMessage, useIntl} from 'react-intl'
+import {useIntl} from 'react-intl'
 
 function Search() {
 
@@ -59,7 +59,7 @@ function Search() {
 
     const handleEnter = (e) => {
         var keycode = (e.keyCode ? e.keyCode : e.which);
-        if (keycode == '13') {
+        if (keycode === '13') {
             history.push('/serviciosFilter/'+input)
         }
     }
@@ -93,9 +93,6 @@ function Search() {
         }
     }
 
-    const handleClickDatalist = (e) => {
-        console.log("clickeo");
-    }
 
 
     useEffect(()=>{

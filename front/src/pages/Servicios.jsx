@@ -31,11 +31,9 @@ const categories = [{categoria: "Carpintería", img: ilCarpinteria},
     {categoria: "Seguridad", img: ilSeguridad},
     {categoria: "VerTodos", img: ilTodos}];
 
-function ServiciosCliente(props){
+function Servicios(props){
 
     const context = useContext(appContext);
-
-    const [state, setState] = useState({});
 
     if (!context.user._id) return <Redirect to='/'/>;
 
@@ -69,4 +67,4 @@ function ServiciosCliente(props){
     )
 }
 
-export default ServiciosCliente;
+export default Servicios;

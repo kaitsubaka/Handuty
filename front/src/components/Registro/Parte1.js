@@ -1,6 +1,4 @@
 import React from 'react'
-import {useEffect, useState} from "react";
-import { Link } from 'react-router-dom';
 import * as Joi from "joi";
 import step from "../../recursos/Step1.svg";
 import {FormattedMessage, useIntl} from "react-intl"

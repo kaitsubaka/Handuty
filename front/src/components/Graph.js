@@ -13,11 +13,31 @@ function Graph(){
 
     const [data, setData] = useState([]);
 
-    function getSuperiorLimitConteo(){
-        const result = Math.max(...data.map(d=>parseFloat(d.conteo)))
-        return (Math.floor(result/stepConteo)+1)*stepConteo
-    }
+    
 
+
+
+
+    useEffect(()=>{
+        fetch("/servicios").then(resp=>resp.json()).then(servicios=>{
+            const temp = {};
+            servicios.forEach(servicio=>{
+                if(temp[servicio.categoria]){
+                    temp[servicio.categoria].conteo++;
+                }else{
+                    temp[servicio.categoria] = {categoria: servicio.categoria, conteo: 1}
+                }
+
+            })
+            setData(Object.values(temp))
+        })
+    }, [])
+
+    useEffect(() => {
+        function getSuperiorLimitConteo(){
+            const result = Math.max(...data.map(d=>parseFloat(d.conteo)))
+            return (Math.floor(result/stepConteo)+1)*stepConteo
+        }
 
     function drawGraph(){
         d3.select(canvas.current).selectAll("*").remove();
@@ -50,12 +70,6 @@ function Graph(){
             .range([0, iheight])
             .padding(0.1);
 
-        const bars = g.selectAll("rect").data(data).enter().append("rect")
-            .attr("class", "bar")
-            .style("fill", "#fdaa46")
-            .attr("y", d => y(intl.formatMessage({id:d.categoria})))
-            .attr("height", y.bandwidth())
-            .attr("width", d => widthScale(d.conteo))
 
 
         g.append("g")
@@ -88,26 +102,8 @@ function Graph(){
             .attr("font-size", "1em");
 
     }
-
-
-    useEffect(()=>{
-        fetch("/servicios").then(resp=>resp.json()).then(servicios=>{
-            const temp = {};
-            servicios.forEach(servicio=>{
-                if(temp[servicio.categoria]){
-                    temp[servicio.categoria].conteo++;
-                }else{
-                    temp[servicio.categoria] = {categoria: servicio.categoria, conteo: 1}
-                }
-
-            })
-            setData(Object.values(temp))
-        })
-    }, [])
-
-    useEffect(() => {
          drawGraph();
-    }, [data]);
+    }, [data, intl]);
 
 
     return (

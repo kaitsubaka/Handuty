@@ -1,7 +1,6 @@
 import React, {useContext, useEffect, useState} from "react";
 import {appContext} from "../context/AppContext";
 import {Link, Redirect} from "react-router-dom";
-import SidebarTrabajador from "../components/SidebarTrabajador";
 import avatarTrabajador from "../recursos/avatarTrabajador.png";
 import editIcon from "../recursos/perfilEditIcon.svg";
 import deleteIcon from "../recursos/deleteIcon.svg";
@@ -10,6 +9,7 @@ import emptyIcon from "../recursos/emptyIcon.svg";
 import addIcon from "../recursos/addNuevo.svg";
 import "./PerfilTrabajador.css";
 import {FormattedMessage, FormattedDate} from 'react-intl'
+import Sidebar from "../components/Sidebar";
 
 function PerfilTrabajador(props){
 
@@ -36,7 +36,7 @@ function PerfilTrabajador(props){
 
     return (
         <div className="App">
-            <SidebarTrabajador/>
+            <Sidebar/>
             <div className="perfil">
                 <div className="perfil-title">
                     <h2><FormattedMessage id="Profile"/></h2>

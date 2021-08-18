@@ -23,7 +23,7 @@ export default function Conversation({ conversation, currentUser}) {
       }
     };
     getUser();
-  }, [currentUser, conversation]);
+  }, [currentUser, conversation, context.user]);
 
 
   return (

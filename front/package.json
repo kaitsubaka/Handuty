@@ -9,6 +9,7 @@
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^12.8.3",
     "bootstrap": "^4.6.0",
+    "chokidar": "^3.5.2",
     "d3": "^6.7.0",
     "joi": "^17.4.0",
     "joi-password-complexity": "^5.1.0",

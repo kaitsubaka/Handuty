@@ -1,7 +1,6 @@
 import React, {useContext, useEffect, useState} from "react";
 import {appContext} from "../context/AppContext";
 import {Link, Redirect} from "react-router-dom";
-import SidebarTrabajador from "../components/SidebarTrabajador";
 import avatarCliente from "../recursos/avatarCliente.png";
 import qrIcon from "../recursos/qrIcon.svg";
 import messageIcon from "../recursos/messageIcon.svg";
@@ -11,6 +10,7 @@ import deleteIcon from "../recursos/deleteGris.svg";
 import calif from "../recursos/califIcon.svg";
 import "./Citas.css";
 import {FormattedMessage, FormattedDate} from 'react-intl'
+import Sidebar from "../components/Sidebar";
 
 
 function CitasTrabajador(props){
@@ -34,13 +34,13 @@ function CitasTrabajador(props){
                 }
             });
         });
-    }, [])
+    }, [context.user, state])
 
     if (!context.user._id) return <Redirect to='/'/>;
 
     return (
         <div className="App">
-            <SidebarTrabajador/>
+            <Sidebar/>
             <div className="citas">
                 <div className="title">
                     <h2><FormattedMessage id="Works"/></h2>

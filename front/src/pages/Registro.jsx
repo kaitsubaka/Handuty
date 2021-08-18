@@ -3,7 +3,6 @@ import ilLogin from "../recursos/ilLogin.svg";
 import logoLogin from "../recursos/logoLogin.png";
 import {Link} from "react-router-dom";
 import "./Registro.css";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import * as Joi from "joi";
 import {Modal, Button} from "react-bootstrap";

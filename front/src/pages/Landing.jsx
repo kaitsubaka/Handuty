@@ -1,13 +1,13 @@
-import React,  {useContext} from "react";
 import {appContext} from "../context/AppContext";
+import {useContext} from "react";
 import {Link} from "react-router-dom";
 import logo from "../recursos/logoBar.png";
 import principal from "../recursos/principal.svg";
 import user from "../recursos/perfilBar.svg";
 import work from "../recursos/trabajador.svg";
-import "./Principal.css";
 import Graph from "../components/Graph";
-import {FormattedMessage, useIntl} from "react-intl";
+import {useIntl} from "react-intl";
+import "./Landing.css";
 
 
 function Principal() {

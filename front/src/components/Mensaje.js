@@ -5,7 +5,7 @@ import { appContext } from "../context/AppContext";
 import avatarTrabajador from "../recursos/avatarTrabajador.png";
 import avatarCliente from "../recursos/avatarCliente.png"
 
-export default function Mensaje({ mensaje, own, isTrabajador }) {
+export default function Mensaje({ mensaje, own }) {
 const context = useContext(appContext)
   return (
     <div className={own ? "message own" : "message"}>

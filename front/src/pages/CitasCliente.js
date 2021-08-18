@@ -13,7 +13,7 @@ import deleteIcon from "../recursos/deleteGris.svg";
 import calif from "../recursos/califGris.svg";
 import {FormattedMessage, FormattedDate} from 'react-intl'
 
-function CitasCliente(props){
+function Citas(props){
 
     const [state, setState] = useState({citas:[]});
 
@@ -212,4 +212,4 @@ function CitasCliente(props){
     );
 }
 
-export default CitasCliente;
+export default Citas;

@@ -1,5 +1,4 @@
 import React from "react";
-import { useEffect, useState } from "react";
 import DatePicker, {registerLocale }from "react-datepicker";
 import step from "../../recursos/Step2.svg";
 import {FormattedMessage} from 'react-intl';
