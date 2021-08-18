@@ -1,11 +1,11 @@
 import express from 'express';
-import ClienteModel from '../models/persona.model';
-import Chat from '../models/chat.model';
-import Reserva from '../models/reserva.model';
+import PersonaModel from '../models/persona.model';
+import ChatModel from '../models/chat.model';
+import ReservaModel from '../models/reserva.model';
 const router = new express.Router();
 
 router.get('/', (req, res) => {
-  ClienteModel.find({}, (err, clientes) => {
+  PersonaModel.find({}, (err, clientes) => {
     if (err) {
       res.status(400).send(err);
     } else {
@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  ClienteModel.create(req.body, (err, cliente) => {
+  PersonaModel.create(req.body, (err, cliente) => {
     if (err) {
       res.status(400).send(err);
     } else {
@@ -24,8 +24,8 @@ router.post('/', (req, res) => {
   });
 });
 
-router.get('/:clienteId', (req, res) => {
-  ClienteModel.findOne({_id: req.params.clienteId}, (err, cliente) => {
+router.get('/:personaId', (req, res) => {
+  PersonaModel.findOne({_id: req.params.personaId}, (err, cliente) => {
     if (err) {
       res.status(400).send(err);
     } else {
@@ -35,8 +35,8 @@ router.get('/:clienteId', (req, res) => {
   });
 });
 
-router.delete('/:clienteId', (req, res) => {
-  ClienteModel.deleteOne({_id: req.params.clienteId}, (err, resp) => {
+router.delete('/:personaId', (req, res) => {
+  PersonaModel.deleteOne({_id: req.params.personaId}, (err, resp) => {
     if (err) {
       res.status(400).send(err);
     } else {
@@ -46,9 +46,9 @@ router.delete('/:clienteId', (req, res) => {
   });
 });
 
-router.patch('/:clienteId', (req, res) => {
-  ClienteModel.findOneAndUpdate(
-      {'_id': req.params.clienteId},
+router.patch('/:personaId', (req, res) => {
+  PersonaModel.findOneAndUpdate(
+      {'_id': req.params.personaId},
       {$set: req.body},
       {runValidators: true}).then((result) => {
     if (result.nModified === 0) {
@@ -58,9 +58,9 @@ router.patch('/:clienteId', (req, res) => {
   }).catch((err) => res.status(400).send(err));
 });
 
-router.put('/:clienteId', (req, res) => {
-  ClienteModel.replaceOne({
-    _id: req.params.clienteId}
+router.put('/:personaId', (req, res) => {
+  PersonaModel.replaceOne({
+    _id: req.params.personaId}
   , req.body
   , {runValidators: true}
   , (err, resp) => {
@@ -74,7 +74,7 @@ router.put('/:clienteId', (req, res) => {
 });
 
 router.get('/:id/chats', (req, res) => {
-  Chat.find({cliente: req.params.id}).then((chats) => {
+  ChatModel.find({cliente: req.params.id}).then((chats) => {
     res.send(chats);
   }).catch((err) => {
     res.status(400).send(err);
@@ -82,7 +82,7 @@ router.get('/:id/chats', (req, res) => {
 });
 
 router.get('/:id/reservas', (req, res) => {
-  Reserva.find({cliente: req.params.id}).then((reservas) => {
+  ReservaModel.find({cliente: req.params.id}).then((reservas) => {
     res.send(reservas);
   }).catch((err) => {
     res.status(400).send(err);
@@ -90,7 +90,7 @@ router.get('/:id/reservas', (req, res) => {
 });
 
 router.get('/:id/reservas/detalle', (req, res) => {
-  Reserva.find({cliente: req.params.id}).populate({
+  ReservaModel.find({cliente: req.params.id}).populate({
     path: 'servicio', populate: {
       path: 'trabajador',
       model: 'Trabajador',
@@ -103,7 +103,7 @@ router.get('/:id/reservas/detalle', (req, res) => {
 });
 
 router.get('/:id/reservas/detalle/next', (req, res) => {
-  Reserva.find({cliente: req.params.id}).populate({
+  ReservaModel.find({cliente: req.params.id}).populate({
     path: 'servicio', populate: {
       path: 'trabajador',
       model: 'Trabajador',
@@ -122,7 +122,7 @@ router.get('/:id/reservas/detalle/next', (req, res) => {
 });
 
 router.get('/:id/reservas/detalle/past', (req, res) => {
-  Reserva.find({cliente: req.params.id}).populate({
+  ReservaModel.find({cliente: req.params.id}).populate({
     path: 'servicio', populate: {
       path: 'trabajador',
       model: 'Trabajador',
@@ -139,7 +139,7 @@ router.get('/:id/reservas/detalle/past', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
-  ClienteModel.findOne({correo: req.body.correo}).then((cliente) => {
+  PersonaModel.findOne({correo: req.body.correo}).then((cliente) => {
     if (!cliente || cliente.contrasena !== req.body.contrasena) {
       return res.sendStatus(404);
     }
@@ -147,4 +147,4 @@ router.post('/login', (req, res) => {
   }).catch((err) => res.status(400).send(err));
 });
 
-module.exports = router;
+export const PersonaRouter = router;
