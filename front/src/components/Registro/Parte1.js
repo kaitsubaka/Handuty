@@ -11,7 +11,7 @@ function Parte1(props) {
 
     const schemaObjectPrimeraParte = {
         nombre: Joi.string().min(1).required(),
-        correo: Joi.string().pattern(new RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)).required(),
+        correo: Joi.string().pattern(new RegExp(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/)).required(),
         contrasena: passwordComplexity(),
         contrasenaRepeat: Joi.ref("contrasena"),
         tipo: Joi.string().required()

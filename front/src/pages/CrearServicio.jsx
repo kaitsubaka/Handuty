@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from "react";
-import {appContext} from "../context/AppContext";
+import {userContext} from "../context/User";
 import {Link, Redirect} from "react-router-dom";
 import flecha from "../recursos/arrowIcon.svg";
 import "./CrearServicio.css";
@@ -33,7 +33,7 @@ function CrearServicio(props){
 
     const [validation, setValidation] = useState({})
 
-    const context = useContext(appContext);
+    const context = useContext(userContext);
 
     const [state, setState] = useState({categorias: [], servicio: {categoria: "Carpintería",
             precio: "", descripcion: "", trabajador: JSON.parse(localStorage.getItem("usuario"))._id}})
@@ -66,7 +66,7 @@ function CrearServicio(props){
         var userLang = navigator.language || navigator.userLanguage; 
         const categorias = userLang.startsWith('en')?categoriesEng:categoriesEsp
         setState({...state, categorias: categorias, categoriasEsp: categoriesEsp});
-    }, [])
+    }, [state])
 
     function handleInputChange(event) {
         setState({...state, servicio: {...state.servicio, [event.target.name]: event.target.value}});

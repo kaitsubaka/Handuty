@@ -1,14 +1,13 @@
 import React, {useState, useContext, useEffect} from "react";
 import Sidebar from "../components/Sidebar";
 import {Link, Redirect} from "react-router-dom";
-import flecha from "../recursos/arrowIcon.svg";
 import "./CrearServicio.css";
-import { appContext } from "../context/AppContext";
+import { userContext } from "../context/User";
 import triangle from "../recursos/triangle.svg";
 import DatePicker, {registerLocale }from "react-datepicker";
 import * as Joi from "joi";
 import {Button, Modal} from "react-bootstrap";
-import {FormattedMessage, useIntl, FormattedDate} from 'react-intl'
+import {FormattedMessage, useIntl} from 'react-intl'
 import es from "date-fns/locale/es";
 import en from "date-fns/locale/es";
 
@@ -17,7 +16,7 @@ function CrearReserva(props){
     registerLocale("es", es);
     registerLocale("en", en);
     const intl = useIntl();
-    const context = useContext(appContext)
+    const context = useContext(userContext)
 
     const schemaObjectCliente = {
         fechaInicio: Joi.string().min(0).custom(validDate).isoDate().required(),
@@ -113,7 +112,7 @@ function CrearReserva(props){
                 setReservas(reservasNew)
             })
         }
-    }, []);
+    }, [props.location.servicio]);
 
     useEffect(() => {
         const startDate = new Date(form.fechaInicio);
@@ -138,7 +137,7 @@ function CrearReserva(props){
         }
         setExcludeTimes(newExcludeDates)
 
-    }, [form]);
+    }, [form, reservas]);
 
     var userLang = navigator.language || navigator.userLanguage; 
 

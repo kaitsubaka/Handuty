@@ -6,7 +6,7 @@ import "./Registro.css";
 import "react-datepicker/dist/react-datepicker.css";
 import * as Joi from "joi";
 import {Modal, Button} from "react-bootstrap";
-import {appContext} from "../context/AppContext";
+import {userContext} from "../context/User";
 import Parte1 from "../components/Registro/Parte1";
 import Parte2 from "../components/Registro/Parte2";
 import {FormattedMessage} from "react-intl"
@@ -18,7 +18,7 @@ function Registro(props){
 
     const schemaObjectTrabajador = {
         nombre: Joi.string().min(1).required(),
-        correo: Joi.string().pattern(new RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)).required(),
+        correo: Joi.string().pattern(new RegExp(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/)).required(),
         contrasena: passwordComplexity(),
         contrasenaRepeat: Joi.ref("contrasena"),
         telefono: Joi.string().required(),
@@ -29,7 +29,7 @@ function Registro(props){
 
     const schemaObjectCliente = {
         nombre: Joi.string().min(1).required(),
-        correo: Joi.string().pattern(new RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)).required(),
+        correo: Joi.string().pattern(new RegExp(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/)).required(),
         contrasena: passwordComplexity(),
         contrasenaRepeat: Joi.ref("contrasena"),
         ciudad: Joi.string().min(1).required(),
@@ -52,7 +52,7 @@ function Registro(props){
 
     const [schemaForm, setSchemaForm] = useState(Joi.object(schemaObjectCliente));
 
-    const context = useContext(appContext);
+    const context = useContext(userContext);
 
     const [next, setNext] = useState(false);
 
@@ -173,7 +173,7 @@ function Registro(props){
 
     useEffect(() => {
         console.log(validation)
-    }, [form]);
+    }, [form, validation]);
 
 
     return (

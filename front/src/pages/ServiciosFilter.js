@@ -1,21 +1,19 @@
 import React, {useContext, useEffect, useState} from "react";
-import {appContext} from "../context/AppContext";
+import {userContext} from "../context/User";
 import {Link, Redirect} from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import Search from "../components/Search";
-import flecha from "../recursos/arrowIcon.svg";
 import fotoPrueba from "../recursos/FotoPrueba1.png";
 import califIcon from "../recursos/califIcon.svg";
 import usersIcon from "../recursos/usersIcon.svg";
-import "./ServiciosDetail.css";
-import {useHistory} from "react-router-dom";
 import triangle from "../recursos/triangle.svg";
 import emptyIcon from "../recursos/emptyIcon.svg";
 import {FormattedMessage, useIntl} from 'react-intl'
+import "./ServiciosDetail.css";
 
 function ServiciosFilter({match}){
 
-    const context = useContext(appContext);
+    const context = useContext(userContext);
     const intl = useIntl();
 
     const defaultValue = "sinRango";
@@ -36,28 +34,7 @@ function ServiciosFilter({match}){
         setPorOrden(event.target.value)
     }
 
-    function sortHow(){
-        if(porOrden==="nombreTrabajador"){
-            return (val1, val2) => {
-                if (val1.nombreTrabajador.toUpperCase() <= val2.nombreTrabajador.toUpperCase()) return -1;
-                else if (val1.nombreTrabajador.toUpperCase() > val2.nombreTrabajador.toUpperCase()) return 1;
-                else return 0;
-            }
-        }else if(porOrden==="precio"){
-            return (val1, val2) => {
-                return val1.precio <= val2.precio ? -1 : val1.precio > val2.precio ? 1 : 0;
-            }
-        }
-    }
-
-    function filterHow(){
-        if(selectedRango==="rango1") return servicio => servicio.precio < 10000
-        if(selectedRango==="rango2") return servicio => servicio.precio >= 10000 && servicio.precio < 20000
-        if(selectedRango==="rango3") return servicio => servicio.precio >= 20000 && servicio.precio < 30000
-        if(selectedRango==="rango4") return servicio => servicio.precio >= 30000 && servicio.precio < 40000
-        if(selectedRango==="rango5") return servicio => servicio.precio >= 40000
-    }
-
+   
 
     useEffect(() => {
         const categoriesEsp = [{categoria: "Carpintería"},
@@ -85,6 +62,29 @@ function ServiciosFilter({match}){
             {categoria: "Plumbing"},
             {categoria: "Security"},
     ];
+
+    function sortHow(){
+        if(porOrden==="nombreTrabajador"){
+            return (val1, val2) => {
+                if (val1.nombreTrabajador.toUpperCase() <= val2.nombreTrabajador.toUpperCase()) return -1;
+                else if (val1.nombreTrabajador.toUpperCase() > val2.nombreTrabajador.toUpperCase()) return 1;
+                else return 0;
+            }
+        }else if(porOrden==="precio"){
+            return (val1, val2) => {
+                return val1.precio <= val2.precio ? -1 : val1.precio > val2.precio ? 1 : 0;
+            }
+        }
+    }
+
+    function filterHow(){
+        if(selectedRango==="rango1") return servicio => servicio.precio < 10000
+        if(selectedRango==="rango2") return servicio => servicio.precio >= 10000 && servicio.precio < 20000
+        if(selectedRango==="rango3") return servicio => servicio.precio >= 20000 && servicio.precio < 30000
+        if(selectedRango==="rango4") return servicio => servicio.precio >= 30000 && servicio.precio < 40000
+        if(selectedRango==="rango5") return servicio => servicio.precio >= 40000
+    }
+
 
     var userLang = navigator.language || navigator.userLanguage; 
     const categories = userLang.startsWith('en')?categoriesEng:categoriesEsp
@@ -129,7 +129,7 @@ function ServiciosFilter({match}){
                 setServicios(serviciosTmp);
             })
         }
-    }, [match.params.id, selectedRango, porOrden]);
+    }, [match.params.id, selectedRango, porOrden, context.user._id]);
 
     function reset(){
         setSelectedRango(defaultValue)

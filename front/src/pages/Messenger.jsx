@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import Mensaje from "../components/Mensaje"
-import { appContext } from '../context/AppContext';
+import { userContext } from '../context/User';
 import Conversation from "../components/Conversation";
 import { io } from "socket.io-client";
 import "./Messenger.css";
@@ -18,7 +18,7 @@ export default function Messenger() {
     const [newMessage, setNewMessage] = useState("");
     const [arrivalMessage, setArrivalMessage] = useState(null);
     const socket = useRef();
-    const { user } = useContext(appContext)
+    const { user } = useContext(userContext)
     const scrollRef = useRef();
     // cosas que me toca hacer por tener 2 documentos de usuario
     const path_aux = user.isTrabajador ? "trabajadores/" : "clientes/";
@@ -44,7 +44,7 @@ export default function Messenger() {
         }
             setMessages((prev)=>[...prev,newMsg]);
         } 
-    }, [arrivalMessage, currentChat]);
+    }, [arrivalMessage, currentChat, user]);
 
     useEffect(() => {
         socket.current.emit("addUser", user._id);
@@ -76,7 +76,7 @@ export default function Messenger() {
             }
         };
         getConversations();
-    }, [user._id]);
+    }, [conversations, path_aux, user._id]);
 
     useEffect(() => {
         scrollRef.current?.scrollIntoView({ behavior: "smooth" });

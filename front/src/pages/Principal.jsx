@@ -1,25 +1,21 @@
-import {appContext} from "../context/AppContext";
+import {userContext} from "../context/User";
 import {useContext} from "react";
 import {Link} from "react-router-dom";
 import logo from "../recursos/logoBar.png";
 import principal from "../recursos/principal.svg";
-import user from "../recursos/perfilBar.svg";
 import work from "../recursos/trabajador.svg";
 import Graph from "../components/Graph";
 import {useIntl} from "react-intl";
-import "./Landing.css";
+import "./Principal.css";
 
 
 function Principal() {
 
     const intl = useIntl();
 
-    const context = useContext(appContext);
+    const user = useContext(userContext);
 
-
-    function handleLogout(){
-        context.logoutUser();
-    }
+    const handleLogout = user.logout;
 
     return (
         <div className="Principal">
@@ -28,40 +24,21 @@ function Principal() {
                     <h1>
                         <img className="logoPrincipal" src={logo} alt="Logo Handuty"/>
                     </h1>
-                    {context.user._id ? (
-                        context.user.isTrabajador === false ? (
+                    {user._id && (
                         <div className="principal-bar-izq">
-                            <Link to="/homeCliente">
+                            <Link to="/home">
                                 <p>Home</p>
                             </Link>
-                            <Link to="/serviciosCliente">
+                            <Link to="/services">
                                 <p>Servicios</p>
                             </Link>
-                            <Link to="/citasCliente">
+                            <Link to="/apointments">
                                 <p>{intl.formatMessage({id:"citas"})}</p>
                             </Link>
-                        </div>): (
-                        <div className="principal-bar-izq">
-                            <Link to="/homeTrabajador">
-                                <p>Home</p>
-                            </Link>
-                            <Link to="/perfilTrabajador">
-                                <p>{intl.formatMessage({id:"Profile"})}</p>
-                            </Link>
-                            <Link to="/citasTrabajador">
-                                <p>{intl.formatMessage({id:"citas"})}</p>
-                            </Link>
-                        </div>
-                        )
-
-                    ) : (
-                        <div></div>
-                    )}
-                    {context.user._id ? (
+                        </div>) }
+                    {user._id ? (
                         <div className="principal-bar-der" onClick={handleLogout}>
-                            <a >
                                 <p>{intl.formatMessage({id:"exit"})}</p>
-                            </a>
                         </div>
                         
                     ):(
@@ -69,7 +46,7 @@ function Principal() {
                             <Link to="/login">
                                 <p>{intl.formatMessage({id:"Login"})}</p>
                             </Link>
-                            <Link to="/registro">
+                            <Link to="/register">
                                 <p>{intl.formatMessage({id:"Register"})}</p>
                             </Link>
                         </div>

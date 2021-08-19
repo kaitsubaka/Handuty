@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from "react";
-import {appContext} from "../context/AppContext";
-import {Link, Redirect} from "react-router-dom";
+import {userContext} from "../context/AppContext";
+import {Link} from "react-router-dom";
 import avatarTrabajador from "../recursos/avatarTrabajador.png";
 import editIcon from "../recursos/perfilEditIcon.svg";
 import deleteIcon from "../recursos/deleteIcon.svg";
@@ -13,26 +13,24 @@ import Sidebar from "../components/Sidebar";
 
 function PerfilTrabajador(props){
 
-    const context = useContext(appContext);
+    const user = useContext(userContext);
 
-    const [state, setState] = useState({servicios: []});
+    const [servicios, setServicios] = useState([]);
 
     useEffect(()=>{
-        if (!context.user._id) return;
-        fetch(`/trabajadores/${context.user._id}/servicios`).then(resp => {
+        if (!user._id) return;
+        fetch(`/trabajadores/${user._id}/servicios`).then(resp => {
             resp.json().then(servicios => {
-                setState({...state, servicios: servicios});
+                setServicios(servicios);
             })
         })
-    }, [])
+    }, [user._id, servicios])
 
     function deleteServicio(event) {
         fetch("/servicios/" + event.target.id, {method: 'DELETE'}).then(() => {
-            setState({...state, servicios: state.servicios.filter(servicio => servicio._id !== event.target.id)})
+            setServicios(servicios.filter(servicio => servicio._id !== event.target.id))
         });
     }
-
-    if (!context.user._id) return <Redirect to='/'/>;
 
     return (
         <div className="App">
@@ -45,16 +43,16 @@ function PerfilTrabajador(props){
                     <div className="mainHome-der">
                         <div className="perfil-main-persona">
                             <img className="imagen" src={avatarTrabajador} alt="Foto"/>
-                            <h3>{context.user.nombre}</h3>
+                            <h3>{user.nombre}</h3>
                         </div>
                         <div className="perfil-main-informacion">
                             <p><FormattedMessage id="Information"/></p>
                             <div className="perfil-main-informacionDetail">
-                                <p><span><FormattedMessage id="Tel"/></span> {context.user.telefono}</p>
-                                <p><span><FormattedMessage id="idNumber"/></span> {context.user.cedula}</p>
+                                <p><span><FormattedMessage id="Tel"/></span> {user.telefono}</p>
+                                <p><span><FormattedMessage id="idNumber"/></span> {user.cedula}</p>
                                 <p>
                                     <span><FormattedMessage id="FecNac"/></span> <FormattedDate
-                                        value = {new Date(context.user.fechaNacimiento).toISOString().substring(0, 10)}
+                                        value = {new Date(user.fechaNacimiento).toISOString().substring(0, 10)}
                                         year='numeric'
                                         month='short'
                                         day='numeric'
@@ -78,8 +76,8 @@ function PerfilTrabajador(props){
                         {navigator.onLine ? (
                             <div>
                             {
-                                state.servicios.length > 0 ?
-                                    state.servicios.map(servicio => {
+                                servicios.length > 0 ?
+                                    servicios.map(servicio => {
                                         return (
                                             <div key={servicio._id} className="servicioDetailPerfil">
                                                 <div className="servicioDetailPerfil-primera">

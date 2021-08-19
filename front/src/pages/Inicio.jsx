@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from "react";
 import avatarTrabajador from "../recursos/avatarTrabajador.png";
-import {appContext} from "../context/AppContext";
-import {Link, Redirect} from "react-router-dom";
+import {userContext} from "../context/User";
+import {Link} from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import Search from "../components/Search";
 import bienvenido from "../recursos/bienvenido.svg";
@@ -12,17 +12,17 @@ import serHome2 from "../recursos/serHome2.svg";
 import serHome3 from "../recursos/serHome3.svg";
 import serHome4 from "../recursos/serHome4.svg";
 import serHome5 from "../recursos/serHome5.svg";
-import "./Home.css";
 import {FormattedMessage, FormattedDate} from 'react-intl'
 import avatarCliente from "../recursos/avatarCliente.png";
 import emptyIcon from "../recursos/emptyIcon.svg";
 import { ROLES } from "../constants/Roles";
+import "./Inicio.css";
 
 
 
 
 
-function Home(props){
+function Inicio(props){
     
     function darFecha(fecha){
         const fechaNueva = new Date(fecha);
@@ -40,7 +40,7 @@ function Home(props){
         return  (fechaFNueva.getTime() - fechaINueva.getTime())/(1000 * 60);
     }
 
-    const context = useContext(appContext);
+    const context = useContext(userContext);
     
     const [reservas, setReservas] = useState([]);
     
@@ -140,10 +140,6 @@ function Home(props){
   
     },[context.user, lastCommunication]);
 
-
-    
-
-    if (!context.user._id) return <Redirect to='/'/>;
 
     if (false)  {return (
         <div className="App">
@@ -663,6 +659,6 @@ function Home(props){
 }
 
 
-export default Home;
+export default Inicio;
 
 

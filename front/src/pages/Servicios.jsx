@@ -1,5 +1,5 @@
-import React, {useContext, useState} from "react";
-import {appContext} from "../context/AppContext";
+import React, {useContext} from "react";
+import {userContext} from "../context/User";
 import ilCarpinteria from "../recursos/ilCarpinteria.svg";
 import ilCerrajeria from "../recursos/ilCerrajeria.svg";
 import ilElectricista from "../recursos/ilElectricista.svg";
@@ -33,7 +33,7 @@ const categories = [{categoria: "Carpintería", img: ilCarpinteria},
 
 function Servicios(props){
 
-    const context = useContext(appContext);
+    const context = useContext(userContext);
 
     if (!context.user._id) return <Redirect to='/'/>;
 

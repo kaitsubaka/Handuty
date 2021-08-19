@@ -1,12 +1,12 @@
 import "./Mensaje.css";
 import { format } from "timeago.js";
 import { useContext } from "react";
-import { appContext } from "../context/AppContext";
+import { userContext } from "../context/User";
 import avatarTrabajador from "../recursos/avatarTrabajador.png";
 import avatarCliente from "../recursos/avatarCliente.png"
 
 export default function Mensaje({ mensaje, own }) {
-const context = useContext(appContext)
+const context = useContext(userContext)
   return (
     <div className={own ? "message own" : "message"}>
       <div className="messageTop">

@@ -1,19 +1,19 @@
 import React, {useContext, useState, useEffect} from "react";
-import {appContext} from "../context/AppContext";
+import {userContext} from "../context/User";
 import logoLogin from "../recursos/logoLogin.png";
 import {Link} from "react-router-dom";
 import ilLogin from "../recursos/ilLogin.svg";
-import "./Login.css";
+import "./Ingreso.css";
 import Joi from "joi";
 import {Button, Modal} from "react-bootstrap";
 import {FormattedMessage, useIntl} from "react-intl"
 
 
-function Login(props){
+function Ingreso(props){
 
     const intl = useIntl();
 
-    const context = useContext(appContext);
+    const context = useContext(userContext);
 
     const [form, setForm] = useState({correo: "", contrasena: "", tipo: "cliente"});
 
@@ -24,7 +24,7 @@ function Login(props){
     const [conError, setConError] = useState(false);
 
     const validator = Joi.object({
-        correo: Joi.string().min(1).pattern(new RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)).required(),
+        correo: Joi.string().min(1).pattern(new RegExp(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/)).required(),
         contrasena: Joi.string().min(1).required(),
         tipo: Joi.string().required(),
     })
@@ -180,4 +180,4 @@ function Login(props){
 
 }
 
-export default Login;
+export default Ingreso;

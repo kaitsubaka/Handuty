@@ -2,11 +2,11 @@ import avatarTrabajador from "../recursos/avatarTrabajador.png";
 import avatarCliente from "../recursos/avatarCliente.png"
 import { useContext, useEffect, useState } from "react";
 import  "./Conversation.css";
-import { appContext } from "../context/AppContext";
+import { userContext } from "../context/User";
 
 export default function Conversation({ conversation, currentUser}) {
   const [user, setUser] = useState(null);
-  const context = useContext(appContext);
+  const context = useContext(userContext);
 
   useEffect(() => {
     const friendId = context.user.isTrabajador?conversation.cliente:conversation.trabajador;

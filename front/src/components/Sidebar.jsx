@@ -4,14 +4,14 @@ import logo from "../recursos/logoBar.png";
 import logout from "../recursos/logoutBar.svg";
 import {NavLink,Link} from 'react-router-dom';
 import {FormattedMessage} from 'react-intl'
-import {appContext} from "../context/AppContext";
+import {userContext} from "../context/User";
 import { ROLES } from '../constants/Roles';
 import "./Sidebar.css";
 import { useState } from 'react';
 
 function Sidebar() {
 
-    const context = useContext(appContext);
+    const context = useContext(userContext);
     const  handleLogout = () => context.logoutUser();
     const [SideBarData, setSideBarData] = useState([])
 

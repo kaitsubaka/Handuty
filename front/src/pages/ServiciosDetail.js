@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from "react";
-import {appContext} from "../context/AppContext";
+import {userContext} from "../context/User";
 import {Link, Redirect} from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import Search from "../components/Search";
@@ -19,7 +19,7 @@ function ServiciosDetail(props){
 
     const defaultValueOrdenar = "sinOrdenar";
 
-    const context = useContext(appContext);
+    const context = useContext(userContext);
 
     const [servicios, setServicios] = useState([])
 
@@ -35,29 +35,30 @@ function ServiciosDetail(props){
         setPorOrden(event.target.value)
     }
 
-    function sortHow(){
-        if(porOrden==="nombreTrabajador"){
-            return (val1, val2) => {
-                if (val1.nombreTrabajador.toUpperCase() <= val2.nombreTrabajador.toUpperCase()) return -1;
-                else if (val1.nombreTrabajador.toUpperCase() > val2.nombreTrabajador.toUpperCase()) return 1;
-                else return 0;
-            }
-        }else if(porOrden==="precio"){
-            return (val1, val2) => {
-                return val1.precio <= val2.precio ? -1 : val1.precio > val2.precio ? 1 : 0;
-            }
-        }
-    }
-
-    function filterHow(){
-        if(selectedRango==="rango1") return servicio => servicio.precio < 10000
-        if(selectedRango==="rango2") return servicio => servicio.precio >= 10000 && servicio.precio < 20000
-        if(selectedRango==="rango3") return servicio => servicio.precio >= 20000 && servicio.precio < 30000
-        if(selectedRango==="rango4") return servicio => servicio.precio >= 30000 && servicio.precio < 40000
-        if(selectedRango==="rango5") return servicio => servicio.precio >= 40000
-    }
+    
 
     useEffect(() => {
+        function sortHow(){
+            if(porOrden==="nombreTrabajador"){
+                return (val1, val2) => {
+                    if (val1.nombreTrabajador.toUpperCase() <= val2.nombreTrabajador.toUpperCase()) return -1;
+                    else if (val1.nombreTrabajador.toUpperCase() > val2.nombreTrabajador.toUpperCase()) return 1;
+                    else return 0;
+                }
+            }else if(porOrden==="precio"){
+                return (val1, val2) => {
+                    return val1.precio <= val2.precio ? -1 : val1.precio > val2.precio ? 1 : 0;
+                }
+            }
+        }
+    
+        function filterHow(){
+            if(selectedRango==="rango1") return servicio => servicio.precio < 10000
+            if(selectedRango==="rango2") return servicio => servicio.precio >= 10000 && servicio.precio < 20000
+            if(selectedRango==="rango3") return servicio => servicio.precio >= 20000 && servicio.precio < 30000
+            if(selectedRango==="rango4") return servicio => servicio.precio >= 30000 && servicio.precio < 40000
+            if(selectedRango==="rango5") return servicio => servicio.precio >= 40000
+        }
         if (!context.user._id) return;
         const pathFetch = props.location.categoria === 'Ver todos'? `/servicios/detalle`:`/servicios/categorias/${props.location.categoria}`
         fetch(pathFetch).then(res => res.json()).then(servicios => {
@@ -77,7 +78,7 @@ function ServiciosDetail(props){
                 serviciosTmp.sort(sortHow())
             setServicios(serviciosTmp);
         })
-    }, [selectedRango, porOrden]);
+    }, [selectedRango, porOrden, context.user._id, props.location.categoria]);
 
     function reset(){
         setSelectedRango(defaultValue)
