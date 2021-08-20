@@ -1,11 +1,12 @@
 import {userContext} from "../context/User";
 import {useContext} from "react";
+import {useIntl} from "react-intl";
 import {Link} from "react-router-dom";
-import logo from "../recursos/logoBar.png";
 import principal from "../recursos/principal.svg";
+import logo from "../recursos/logoBar.png";
+import person from "../recursos/perfilBar.svg";
 import work from "../recursos/trabajador.svg";
 import Graph from "../components/Graph";
-import {useIntl} from "react-intl";
 import "./Principal.css";
 
 
@@ -13,9 +14,9 @@ function Principal() {
 
     const intl = useIntl();
 
-    const user = useContext(userContext);
+    const {user, logout} = useContext(userContext);
 
-    const handleLogout = user.logout;
+    const handleLogout = logout;
 
     return (
         <div className="Principal">
@@ -64,7 +65,7 @@ function Principal() {
             </div>
             <div className="principal-segundo">
                 <div className="principal-segundo-izq">
-                    <img className="iconPrincipal" src={user} alt="Logo Handuty"/>
+                    <img className="iconPrincipal" src={person} alt="Logo Handuty"/>
                     <p className="principal-segundo-der-prin">{intl.formatMessage({id:"ClientePrincipal"})}</p>
                     <p>{intl.formatMessage({id:"ClientePrincipalTexto"})}</p>
                 </div>

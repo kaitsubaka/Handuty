@@ -1,11 +1,10 @@
-import React from 'react'
 import * as Joi from "joi";
 import step from "../../recursos/Step1.svg";
 import {FormattedMessage, useIntl} from "react-intl"
 
 const passwordComplexity = require("joi-password-complexity").default;
 
-function Parte1(props) {
+function PasoUno(props) {
 
     const intl = useIntl();
 
@@ -89,4 +88,4 @@ function Parte1(props) {
     )
 }
 
-export default Parte1
+export default PasoUno

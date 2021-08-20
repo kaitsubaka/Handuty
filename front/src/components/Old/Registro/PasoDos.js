@@ -5,7 +5,7 @@ import {FormattedMessage} from 'react-intl';
 import es from "date-fns/locale/es";
 import en from "date-fns/locale/es";
 
-function Parte2(props) {
+function PasoDos(props) {
 registerLocale("es", es);
 registerLocale("en", en);
   const validation  = props.validationParent;
@@ -103,4 +103,4 @@ registerLocale("en", en);
   );
 }
 
-export default Parte2;
+export default PasoDos;

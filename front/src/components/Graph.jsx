@@ -13,11 +13,6 @@ function Graph(){
 
     const [data, setData] = useState([]);
 
-    
-
-
-
-
     useEffect(()=>{
         fetch("/servicios").then(resp=>resp.json()).then(servicios=>{
             const temp = {};

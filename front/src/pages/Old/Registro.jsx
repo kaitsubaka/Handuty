@@ -6,9 +6,9 @@ import "./Registro.css";
 import "react-datepicker/dist/react-datepicker.css";
 import * as Joi from "joi";
 import {Modal, Button} from "react-bootstrap";
-import {userContext} from "../context/User";
-import Parte1 from "../components/Registro/Parte1";
-import Parte2 from "../components/Registro/Parte2";
+import {userContext} from "../../context/User";
+import PasoUno from "../components/Registro/PasoUno";
+import PasoDos from "../components/Registro/PasoDos";
 import {FormattedMessage} from "react-intl"
 const passwordComplexity = require("joi-password-complexity").default;
 
@@ -189,9 +189,9 @@ function Registro(props){
                     <h1><img className="logoRegistro" src={logoLogin} alt="Logo Handuty"/></h1>
                     <form className="register-izq-inputs">
                     { next === false ?
-                        <Parte1 setShowError={setShowError} validationParent = {validation} formParent = {form} callback={handleChange} callbackNext={handleNext}/>
+                        <PasoUno setShowError={setShowError} validationParent = {validation} formParent = {form} callback={handleChange} callbackNext={handleNext}/>
                         :
-                        <Parte2 validationParent = {validation} formParent = {form} callback={handleChange} callbackDate={handleDateChange} />
+                        <PasoDos validationParent = {validation} formParent = {form} callback={handleChange} callbackDate={handleDateChange} />
                     }
                     </form>
                     { next === true ?
