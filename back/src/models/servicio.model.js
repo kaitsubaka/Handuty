@@ -1,6 +1,6 @@
 /* eslint-disable no-invalid-this */
 import {Schema, model} from 'mongoose';
-import {categoryValidator} from '../utils/validator.model';
+import {categoryValidator} from '../utils/validator';
 
 const servicio = new Schema({
   categoria: {

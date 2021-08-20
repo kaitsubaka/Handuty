@@ -1,16 +1,13 @@
-import cookieParser from 'cookie-parser';
-import express from 'express';
-import logger from 'morgan';
-import {initMongoose} from './mongoose';
-import path from 'path';
 import {MensajeRouter} from '../routes/mensajes.routes';
 import {ChatRouter} from '../routes/chat.routes';
 import {PersonaRouter} from '../routes/personas.routes';
 import {ReservaRouter} from '../routes/reservas.routes';
 import {ServicioRouter} from '../routes/servicios.routes';
+import cookieParser from 'cookie-parser';
+import express from 'express';
+import logger from 'morgan';
+import path from 'path';
 
-
-initMongoose();
 // Express
 const app = express();
 app.use(logger('dev'));

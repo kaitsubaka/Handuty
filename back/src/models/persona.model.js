@@ -1,6 +1,6 @@
 /* eslint-disable no-invalid-this */
 import {Schema, model} from 'mongoose';
-import {dateValidator} from '../utils/validator.model';
+import {dateValidator} from '../utils/validator';
 import {ReservaModel} from './reserva.model';
 import {ChatModel} from './chat.model';
 import {ROLES} from '../constants/rol.const';

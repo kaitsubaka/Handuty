@@ -12,8 +12,9 @@ config();
 */
 import {GLOBAL} from './constants/global.const';
 import {initServerWS} from './lib/websokets';
-import http from 'http';
+import {initMongoose} from './lib/mongoose';
 import app from './lib/app';
+import http from 'http';
 // import Debug from 'debug';
 
 /*
@@ -86,6 +87,11 @@ function onListening() {
   const bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
   console.log('Listening on ' + bind);
 }
+
+/**
+ * init mongoose schema.
+ */
+initMongoose();
 
 /**
  * Serve Web Sokets for chat.
