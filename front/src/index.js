@@ -19,7 +19,7 @@ ReactDOM.render(
       <App />
     </main>
     </IntlProvider>,
-  document.getElementById('root')
+  document.getElement('root')
 );
 
 // If you want your app to work offline and load faster, you can change

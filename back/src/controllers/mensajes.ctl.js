@@ -8,8 +8,8 @@ export const getMessages = (req, res) => {
 };
 
 // obtener un mensaje de un chat
-export const getMessageById = (req, res) => {
-  MensajeModel.findById(req.params.mensajeId, (err, mensaje) => {
+export const getMessage = (req, res) => {
+  MensajeModel.find(req.params.mensajeId, (err, mensaje) => {
     if (err) {
       res.status(400).send(err);
     } else {
@@ -21,7 +21,7 @@ export const getMessageById = (req, res) => {
 
 // crear un nuevo mensaje en un chat
 export const createMessage = (req, res) => {
-  ChatModel.findById(req.body.chat, (err, chat) => {
+  ChatModel.find(req.body.chat, (err, chat) => {
     if (err) return res.status(400).send(err);
     if (chat != null) {
       MensajeModel.create(req.body, (err, mensaje) => {

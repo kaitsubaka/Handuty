@@ -23,7 +23,7 @@ export const createPersona = (req, res) => {
   });
 };
 
-export const getPersonaById = (req, res) => {
+export const getPersona = (req, res) => {
   PersonaModel.findOne({_id: req.params.personaId}, (err, cliente) => {
     if (err) {
       res.status(400).send(err);

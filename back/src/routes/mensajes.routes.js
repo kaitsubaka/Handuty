@@ -2,7 +2,7 @@ import {Router} from 'express';
 import {
   createMessage,
   deleteMessage,
-  getMessageById,
+  getMessage,
   getMessages,
   patchMessage,
   updateMessage,
@@ -12,7 +12,7 @@ const router = new Router();
 router.get('/', getMessages);
 
 // obtener un mensaje de un chat
-router.get('/:mensajeId', getMessageById);
+router.get('/:mensajeId', getMessage);
 
 // crear un nuevo mensaje en un chat
 router.post('/', createMessage);

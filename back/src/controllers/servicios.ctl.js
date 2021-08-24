@@ -26,7 +26,7 @@ export const getCategorias = (req, res) => {
 };
 
 export const getService = (req, res) => {
-  ServicioModel.findById(req.params.id).then((servicio) => {
+  ServicioModel.find(req.params.id).then((servicio) => {
     if (!servicio) return res.status(404).send('ServicioModel no encontrado');
     res.send(servicio);
   }).catch((err) => res.status(400).send(err));
@@ -53,7 +53,7 @@ export const patchService = (req, res) => {
 };
 
 export const createService = (req, res) => {
-  PersonaModel.findById(req.body.trabajador).then((trabajador) => {
+  PersonaModel.find(req.body.trabajador).then((trabajador) => {
     if (!trabajador) return res.status(404).send('PersonaModel no encontrado');
     ServicioModel.findOne(
         {trabajador: trabajador._id, categoria: req.body.categoria})

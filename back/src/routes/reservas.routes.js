@@ -3,7 +3,7 @@ import {Router} from 'express';
 import {
   createReserva,
   deleteReserva,
-  getReservaById,
+  getReserva,
   getReservas,
   patchReserva,
   updateReserva,
@@ -12,7 +12,7 @@ const router = new Router();
 
 router.get('/', getReservas);
 
-router.get('/:id', getReservaById);
+router.get('/:id', getReserva);
 
 router.put('/:id', updateReserva);
 

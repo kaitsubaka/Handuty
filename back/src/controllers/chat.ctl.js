@@ -8,8 +8,8 @@ export const getChats = (req, res) => {
   });
 };
 
-export const getChatById = (req, res) => {
-  ChatModel.findById(req.params.chatId, (err, chat) => {
+export const getChat = (req, res) => {
+  ChatModel.find(req.params.chatId, (err, chat) => {
     if (err) return res.status(400).send(err);
     else if (!chat) return res.sendStatus(404);
     res.send(chat);
@@ -17,10 +17,10 @@ export const getChatById = (req, res) => {
 };
 
 export const createChat = (req, res) => {
-  PersonaModel.findById(req.body.cliente, (err, cliente) => {
+  PersonaModel.find(req.body.cliente, (err, cliente) => {
     if (err) return res.status(400).send(err);
     if (cliente != null) {
-      PersonaModel.findById(req.body.trabajador, (err, trabajador) => {
+      PersonaModel.find(req.body.trabajador, (err, trabajador) => {
         if (err) return res.status(400).send(err);
         if (trabajador != null) {
           ChatModel.create(req.body, (err, chat) => {

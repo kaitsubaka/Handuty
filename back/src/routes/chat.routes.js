@@ -2,7 +2,7 @@ import {Router} from 'express';
 import {
   createChat,
   deleteChat,
-  getChatById,
+  getChat,
   getChatMessages,
   getChats,
   patchChat,
@@ -13,7 +13,7 @@ const router = new Router();
 
 router.get('/', getChats);
 
-router.get('/:chatId', getChatById);
+router.get('/:chatId', getChat);
 
 router.post('/', createChat);
 

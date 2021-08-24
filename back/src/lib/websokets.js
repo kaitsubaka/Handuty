@@ -10,6 +10,9 @@ export function initServerWS(server) {
       origin: 'http://localhost:3000',
     },
   });
+
+  console.log('WS conection success');
+
   const addUser = (userId, socketId) => {
     !users.some((user) => user.userId === userId) &&
       users.push({userId, socketId});

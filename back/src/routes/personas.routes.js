@@ -2,7 +2,7 @@ import {Router} from 'express';
 import {
   createPersona,
   deletePersona,
-  getPersonaById,
+  getPersona,
   getPersonaChats,
   getPersonaReservas,
   getPersonaReservasDetailNext,
@@ -24,7 +24,7 @@ router.get('/', getPersonas);
 
 router.post('/', createPersona);
 
-router.get('/:personaId', getPersonaById);
+router.get('/:personaId', getPersona);
 
 router.delete('/:personaId', deletePersona);
 

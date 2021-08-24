@@ -12,8 +12,8 @@ export const getReservas = (req, res) => {
   });
 };
 
-export const getReservaById = (req, res) => {
-  ReservaModel.findById(req.params.id).then((reserva) => {
+export const getReserva = (req, res) => {
+  ReservaModel.find(req.params.id).then((reserva) => {
     if (!reserva) return res.sendStatus(404);
     res.send(reserva);
   }).catch((err) => res.status(400).send(err));
@@ -48,9 +48,9 @@ export const patchReserva = (req, res) => {
 
 export const createReserva = (req, res) => {
   verifyDatesService(req, res, () => {
-    PersonaModel.findById(req.body.cliente).then((cliente) => {
+    PersonaModel.find(req.body.cliente).then((cliente) => {
       if (!cliente) return res.status(404).send('PersonaModel no encontrado');
-      ServicioModel.findById(req.body.servicio).then((servicio) => {
+      ServicioModel.find(req.body.servicio).then((servicio) => {
         if (!servicio) {
           return res.status(404).send('ServicioModel no encontrado');
         };

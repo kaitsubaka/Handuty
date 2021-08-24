@@ -1,18 +1,9 @@
 import {useState} from "react";
 import {userContext} from './context/User';
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
-// import ServiciosDetail from "./pages/ServiciosDetail";
-// import ServiciosFilter from "./pages/ServiciosFilter";
-// import CrearServicio from './pages/CrearServicio';
-// import CrearReserva from './pages/CrearReserva';
-// import Messenger from "./pages/Messenger";
-// import Registro from './pages/Registro';
-// import Ingreso from './pages/Ingreso';
-// import Citas from "./pages/Citas";
-// import Servicios from "./pages/Servicios";
-// import Inicio from "./pages/Inicio";
 import Principal from "./pages/Principal";
 import "./App.css"; 
+import Ingreso from "./pages/Ingreso";
 
 
 function App(){
@@ -26,8 +17,8 @@ function App(){
                     <Switch>
                         <Route path="/" exact component={Principal}/>
                         <Route path="/landing" component={Principal}/>
-                        {/* <Route path="/login" exact component={Ingreso}/>
-                        <Route path="/register" component={Registro}/>
+                        <Route path="/login" exact component={Ingreso}/>
+                        {/*<Route path="/register" component={Registro}/>
                         <Route path="/home" component={Inicio}/>
                         <Route path="/apointments" component={Citas}/>
                         <Route path="/services" component={Servicios}/>

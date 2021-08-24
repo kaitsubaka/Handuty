@@ -102,9 +102,7 @@ function Graph(){
 
 
     return (
-        <div>
             <div ref={canvas}/>
-        </div>
     );
 
 

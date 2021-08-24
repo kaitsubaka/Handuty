@@ -5,7 +5,11 @@ export const initMongoose = () => {
   // - set up default mongoose connection
   connect(
       process.env.MONGODB_URL || GLOBAL.MONGODB_URL,
-      {useNewUrlParser: true, useUnifiedTopology: true},
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true,
+      },
       (err) =>
       err ?
         console.log('MongoDB connection error:', err) :
