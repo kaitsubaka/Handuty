@@ -4,6 +4,8 @@ import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import Principal from "./pages/Principal";
 import "./App.css"; 
 import Ingreso from "./pages/Ingreso";
+import Registro from "./pages/Registro";
+import Inicio from "./pages/Inicio";
 
 
 function App(){
@@ -18,8 +20,9 @@ function App(){
                         <Route path="/" exact component={Principal}/>
                         <Route path="/landing" component={Principal}/>
                         <Route path="/login" exact component={Ingreso}/>
-                        {/*<Route path="/register" component={Registro}/>
+                        <Route path="/register" component={Registro}/>
                         <Route path="/home" component={Inicio}/>
+                        {/*
                         <Route path="/apointments" component={Citas}/>
                         <Route path="/services" component={Servicios}/>
                         <Route path="/services-detail" component={ServiciosDetail}/>

@@ -2,7 +2,7 @@
 import {PersonaModel} from '../models/persona.model';
 import {ReservaModel} from '../models/reserva.model';
 import {ServicioModel} from '../models/servicio.model';
-import {Categorias} from '../utils/validator';
+import {Categorias} from '../constants/categories.const';
 
 
 export const getServices = (req, res) => {

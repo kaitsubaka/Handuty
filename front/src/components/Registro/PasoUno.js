@@ -4,7 +4,7 @@ import {FormattedMessage, useIntl} from "react-intl"
 
 const passwordComplexity = require("joi-password-complexity").default;
 
-function PasoUno(props) {
+function PasoUno({setShowError,validationParent,formParent,callback,callbackNext}) {
 
     const intl = useIntl();
 
@@ -13,26 +13,26 @@ function PasoUno(props) {
         correo: Joi.string().pattern(new RegExp(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/)).required(),
         contrasena: passwordComplexity(),
         contrasenaRepeat: Joi.ref("contrasena"),
-        tipo: Joi.string().required()
+        rol: Joi.string().required()
     }
 
     const joiValidator = Joi.object(schemaObjectPrimeraParte);
 
-    const defaultTipo = "cliente";
+    const defaultRol = "cliente";
 
     function handleAction(event){
-        props.callback(event);
+        callback(event);
     }
 
     function handleClick(event){
         event.preventDefault();
-        const importantFields = {nombre:props.formParent.nombre, correo: props.formParent.correo,
-            contrasena: props.formParent.contrasena, contrasenaRepeat: props.formParent.contrasenaRepeat, tipo: props.formParent.tipo }
+        const importantFields = {nombre:formParent.nombre, correo: formParent.correo,
+            contrasena: formParent.contrasena, contrasenaRepeat: formParent.contrasenaRepeat, rol: formParent.rol }
         const validation = joiValidator.validate(importantFields);
         if(validation.error){
-            props.setShowError(true);
+            setShowError(true);
         }else{
-            props.callbackNext();
+            callbackNext();
         }
     }
 
@@ -46,39 +46,39 @@ function PasoUno(props) {
                     <p className="registro-steps-der-tit"><FormattedMessage id="Paso1"/></p>
                 </div>
                 <label htmlFor="inputText1"><p><FormattedMessage id="CompleteName"/></p></label>
-                <input type="text" onChange={handleAction} id="inputText1" name="nombre" className={`${props.validationParent.error && props.validationParent.error.message.includes('"nombre"')? "is-invalid" : "is-valid"}`}/>
-                            {props.validationParent.error && props.validationParent.error.message.includes('"nombre"') &&
+                <input type="text" onChange={handleAction} id="inputText1" name="nombre" className={`${validationParent.error && validationParent.error.message.includes('"nombre"')? "is-invalid" : "is-valid"}`}/>
+                            {validationParent.error && validationParent.error.message.includes('"nombre"') &&
                 <div className="invalid-feedback">
                     <FormattedMessage id="VerName"/>
                 </div>}
                 <div>
                     <label htmlFor="inputText2"><p><FormattedMessage id="Mail"/></p></label>
                 </div>
-                <input type="text"  onChange={handleAction} id="inputText2" name="correo" className={`${props.validationParent.error && props.validationParent.error.message.includes('"correo"')? "is-invalid" : "is-valid"}`}/>
-                            {props.validationParent.error && props.validationParent.error.message.includes('"correo"') &&
+                <input type="text"  onChange={handleAction} id="inputText2" name="correo" className={`${validationParent.error && validationParent.error.message.includes('"correo"')? "is-invalid" : "is-valid"}`}/>
+                            {validationParent.error && validationParent.error.message.includes('"correo"') &&
                 <div className="invalid-feedback">
                     <FormattedMessage id="VerMail"/>
                 </div>}
                 <div className="contrasena">
                     <div className="bloque">
                         <label htmlFor="inputText3"><p><FormattedMessage id="Password"/></p></label>
-                        <input type="password"  onChange={handleAction} id="inputText3" name="contrasena" className={`${props.validationParent.error && props.validationParent.error.message.includes('"contrasena"')? "is-invalid" : "is-valid"}`}/>
-                                    {props.validationParent.error && props.validationParent.error.message.includes('"contrasena"') &&
+                        <input type="password"  onChange={handleAction} id="inputText3" name="contrasena" className={`${validationParent.error && validationParent.error.message.includes('"contrasena"')? "is-invalid" : "is-valid"}`}/>
+                                    {validationParent.error && validationParent.error.message.includes('"contrasena"') &&
                         <div className="invalid-feedback">
                             <FormattedMessage id="VerPass"/>
                         </div>}
                     </div>
                     <div className="bloque">
                         <label htmlFor="inputText4"><p><FormattedMessage id="Repeat"/></p></label>
-                        <input type="password"  onChange={handleAction} id="inputText4" name="contrasenaRepeat" className={`${props.validationParent.error && props.validationParent.error.message.includes('"contrasenaRepeat"')? "is-invalid" : "is-valid"}`}/>
-                                    {props.validationParent.error && props.validationParent.error.message.includes('"contrasenaRepeat"') &&
+                        <input type="password"  onChange={handleAction} id="inputText4" name="contrasenaRepeat" className={`${validationParent.error && validationParent.error.message.includes('"contrasenaRepeat"')? "is-invalid" : "is-valid"}`}/>
+                                    {validationParent.error && validationParent.error.message.includes('"contrasenaRepeat"') &&
                         <div className="invalid-feedback">
                             <FormattedMessage id="VerEquals"/>
                         </div>}
                     </div>
                 </div>
                 <label htmlFor="inputState"><p><FormattedMessage id="SelectType"/></p></label>
-                <select  onChange={handleAction} defaultValue={defaultTipo} id="inputState" className="form-control" name="tipo">
+                <select  onChange={handleAction} defaultValue={defaultRol} id="inputState" className="form-control" name="rol">
                         <option value="trabajador">{intl.formatMessage({id:"Worker"})}</option>
                         <option value="cliente">{intl.formatMessage({id:"Client"})}</option>
                 </select>

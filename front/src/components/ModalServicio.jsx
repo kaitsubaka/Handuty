@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import "./ModalServicio.css";
 
-const ModalServicio = ({handleClose, show, context}) => {
+const ModalServicio = ({handleClose, show}) => {
     const [categorias, setCategorias] = useState([]);
     const [servicio, setServicio] = useState({categoria: "", precio: "", descripcion: ""});
     const showHideClassName = show ? "modal display-block" : "modal display-none";

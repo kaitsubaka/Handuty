@@ -6,6 +6,8 @@ import es from "date-fns/locale/es";
 import en from "date-fns/locale/es";
 
 function PasoDos(props) {
+
+    console.log(props)
 registerLocale("es", es);
 registerLocale("en", en);
   const validation  = props.validationParent;
@@ -29,7 +31,6 @@ registerLocale("en", en);
         <div>
             <p className="registro-steps-der-tit"><FormattedMessage id="Paso2"/></p>
         </div>
-        {form.tipo === "cliente" && (
             <div className="contrasena">
             <div className="bloque">
                 <label htmlFor="inputText1"><p><FormattedMessage id="City"/></p></label>
@@ -56,7 +57,7 @@ registerLocale("en", en);
                 )}
             </div>
             </div>
-        )}
+
         <div className="contrasena">
             <div className="bloque">
             <label htmlFor="inputText3"><p><FormattedMessage id="Phone"/></p></label>
